@@ -1,0 +1,34 @@
+# Build outputs
+bin/
+obj/
+artifacts/
+publish/
+
+# Local configuration and logs
+bridge-config.json
+logs/
+*.log
+
+# IDE/editor files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+Properties/PublishProfiles/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test and coverage output
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+packages/

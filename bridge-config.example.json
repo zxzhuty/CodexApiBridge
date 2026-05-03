@@ -1,0 +1,47 @@
+{
+  "listen_url": "http://127.0.0.1:11434",
+  "upstream_base_url": "https://api.example.com",
+  "upstream_api_key": "sk-your-third-party-key",
+  "model_override": "",
+  "forward_incoming_authorization": true,
+  "enable_custom_tool_compatibility": true,
+  "enable_image_generation_tool_compatibility": true,
+  "enable_namespace_tool_compatibility": true,
+  "enable_reasoning_content_compatibility": true,
+  "enable_missing_reasoning_content_fallback": true,
+  "missing_reasoning_content_fallback": "Reasoning content was not captured by the bridge in a previous turn.",
+  "enable_verbose_body_logging": false,
+  "enable_tool_forwarding_execution": true,
+  "max_tool_forwarding_iterations": 4,
+  "request_timeout_seconds": 600,
+  "log_directory": "logs",
+  "tool_forwarding_rules": [
+    {
+      "enabled": true,
+      "responses_tool_type": "web_search",
+      "function_name": "web_search",
+      "description": "Search the web using the configured external search/MCP gateway.",
+      "parameters_json": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"query\": { \"type\": \"string\", \"description\": \"Search query.\" }\n  },\n  \"required\": [\"query\"],\n  \"additionalProperties\": true\n}",
+      "forward_mode": "http",
+      "forward_endpoint": "http://127.0.0.1:3000/search"
+    },
+    {
+      "enabled": false,
+      "responses_tool_type": "web_search",
+      "function_name": "web_search",
+      "description": "Example MCP stdio search tool.",
+      "parameters_json": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"query\": { \"type\": \"string\", \"description\": \"Search query.\" }\n  },\n  \"required\": [\"query\"],\n  \"additionalProperties\": true\n}",
+      "forward_mode": "mcp_stdio",
+      "forward_endpoint": "npx -y your-mcp-search-server"
+    },
+    {
+      "enabled": false,
+      "responses_tool_type": "web_search",
+      "function_name": "web_search",
+      "description": "Example MCP SSE search tool.",
+      "parameters_json": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"query\": { \"type\": \"string\", \"description\": \"Search query.\" }\n  },\n  \"required\": [\"query\"],\n  \"additionalProperties\": true\n}",
+      "forward_mode": "mcp_sse",
+      "forward_endpoint": "http://127.0.0.1:8000/sse"
+    }
+  ]
+}
